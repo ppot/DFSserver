@@ -1,0 +1,103 @@
+version: '2'
+services:
+  web:
+    build: ./client
+    volumes:
+      - "./client:/src/client"
+    ports:
+      - "1337:1337"
+    links:
+      - dfs_1:dfs_1
+      - dfs_2:dfs_2
+      - dfs_3:dfs_3
+      - dfs_4:dfs_4
+    networks:
+      dfs_network:
+          ipv4_address: 172.16.238.10
+    command: nodemon -L client/bin/www
+  
+  dfs_1:
+    build: ./app
+    volumes:
+      - "./app:/src/app"
+    ports:
+      - "3010:3000"
+    # links:
+    #   - "db:redis"
+    networks:
+      dfs_network:
+          ipv4_address: 172.16.238.11
+    command: node app/bin/sh.js
+
+  dfs_2:
+    build: ./app
+    volumes:
+      - "./app:/src/app"
+    ports:
+      - "3020:3000"
+    # links:
+    #   - "db:redis"
+    networks:
+      dfs_network:
+          ipv4_address: 172.16.238.12
+    command: node app/bin/sh.js
+
+  dfs_3:
+    build: ./app
+    volumes:
+      - "./app:/src/app"
+    ports:
+      - "3030:3000"
+    # links:
+    #   - "db:redis"
+    networks:
+      dfs_network:
+          ipv4_address: 172.16.238.13
+    command: node app/bin/sh.js
+
+  dfs_4:
+    build: ./app
+    volumes:
+      - "./app:/src/app"
+    ports:
+      - "3040:3000"
+    # links:
+    #   - "db:redis"
+    networks:
+      dfs_network:
+          ipv4_address: 172.16.238.14
+    command: node app/bin/sh.js
+  
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - /www/public
+    volumes_from:
+      - web
+      # - dfs_1
+      # - dfs_2
+      # - dfs_3
+      # - dfs_4
+    links:
+      - web:web
+    networks:
+      dfs_network:
+          ipv4_address: 172.16.238.9
+
+  db:
+    image: redis
+    networks:
+      dfs_network:
+          ipv4_address: 172.16.238.5
+  
+networks:
+  dfs_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="stylesheets/normalize.css">
+  <link rel="stylesheet" href="stylesheets/skeleton.css">
+  <link rel='stylesheet' href='stylesheets/style.css' />
+  <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <script src="/javascripts/jquery-1.12.0.js"></script>
+</head>
+<body>
+  <div class="app-section">
+    <div class="app-header">
+      <div class="container">
+          <h6>DFS application</h6>
+      </div>
+    </div>
+      <div class="app">
+        <div class="container">
+          <div class="row">
+            <div class="three columns module">
+              <div class="inner">
+                <h6>Logs</h6>
+              </div>
+            </div>
+            <div class="three columns module">
+              <div class="inner">
+                <h6>File status</h6>
+              </div>
+            </div>
+            <div class="three columns module">
+              <div class="inner">
+                <h6>Server action</h6>
+              </div>
+            </div>
+            <div class="three columns module">
+              <div class="inner">
+                <h6>Server status</h6>
+              </div>
+            </div>
+          </div>    
+          <div class="row">
+            <div class="twelve columns module">
+              <div class="inner">
+                <h6>Server connection</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+<section class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="twelve columns">
+        <p class="text"><span class="trade">&trade;</span> DFS advocado 2016</p>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> -->
+  <!-- <script>
+    var socket;
+  $(document).ready(function(){
+      socket = io.connect('http://192.168.99.100:3010');
+      console.log(socket);
+      $('form').submit(function(){
+        socket.emit('chat_message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+      socket.on('chat_message', function(msg){
+        console.log(msg);
+        $('#messages').append($('<li>').text(msg));
+      });
+    });
+  </script> -->
+  <!-- <ul id="messages"></ul>
+  <form action="">
+    <input id="m" autocomplete="off" /><button>Send</button>
+  </form> -->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

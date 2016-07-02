@@ -56,6 +56,12 @@
               <div class="inner">
                 <h6>Server status</h6>
               </div>
+              <!-- <i class="fa fa-check-circle" aria-hidden="true">
+             <i class="fa fa-times-circle" aria-hidden="true"></i> -->
+              <div class="dfs_entry" id="dfs_1"> dfs_server 1 </i> </div> 
+              <div class="dfs_entry" id="dfs_2"> dfs_server 2 </div>
+              <div class="dfs_entry" id="dfs_3"> dfs_server 3 </div>
+              <div class="dfs_entry" id="dfs_4"> dfs_server 4 </div>
             </div>
           </div>    
           <div class="row">
@@ -77,6 +83,23 @@
     </div>
   </div>
 </section>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+  console.log(socket);
+  socket.on('server_status', function(msg){
+    var dfs_entry = JSON.parse(msg);
+    if(dfs_entry.status){
+      $( "#" + dfs_entry.entry ).addClass( "up" );
+      $( "#" + dfs_entry.entry ).removeClass( "down" );
+    } else{
+      $( "#" + dfs_entry.entry ).removeClass( "up" );
+      $( "#" + dfs_entry.entry ).addClass( "down" );
+    }
+  });
+  
+</script>
+
   <!-- <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> -->
   <!-- <script>
     var socket;

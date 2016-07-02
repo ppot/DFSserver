@@ -1,6 +1,6 @@
 const fs = require('fs');
-const exec = require('child_process').exec;
 const os = require('os');
+const exec = require('child_process').exec;
 const http = require('http').createServer();
 var io = require('socket.io')(http); 
 // var redis = require('socket.io-redis');

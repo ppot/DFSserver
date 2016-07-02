@@ -40,10 +40,27 @@ form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 
   box-shadow: none;
   margin-top: 1rem;
   border: 1px solid #E7E7EC;
-  padding-bottom: 13rem;
+  /*padding-bottom: 13rem;*/
 }
 .app .module .inner{
   padding-left: 1rem;
+}
+
+.dfs_entry{
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #E7E7EC;
+  margin-bottom: 2px;
+}
+
+.up {
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+
+.down {
+  color: #a94442;
+  background-color: #f2dede;
 }
 
 /*.app h6 {
@@ -67,9 +84,6 @@ form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 
   color:#68559B;
 }
 
-.right {
-  float:right;
-}
 /* Sections
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .section {

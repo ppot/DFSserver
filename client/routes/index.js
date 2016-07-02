@@ -1,7 +1,9 @@
 var express = require('express');
 var redis = require('redis');
-
+var http = require('http').Server(express);
 var router = express.Router();
+
+var exec = require('child_process').exec;
 
 /* redis */
 // var host = process.env.REDIS_PORT_6379_TCP_ADDR || '172.16.238.8';

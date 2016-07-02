@@ -45,7 +45,7 @@
       </div>
       <div class="row">
           <div class="four columns">
-            <button class="button right" id="auth">Connect</button>
+            <button class="button u-pull-right" id="auth">Connect</button>
           </div>
       </div>
     </div>
@@ -60,7 +60,6 @@
   </div>
 </section>
 <script src="/javascripts/auth.js"></script>
-  <!-- <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> -->
   <!-- <script>
     var socket;
   $(document).ready(function(){

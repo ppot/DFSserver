@@ -1,4 +1,5 @@
 env:
+	clear
 	docker-compose kill
 	docker-compose rm --all --force
 	docker-compose build

@@ -42,25 +42,51 @@ form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 
   border: 1px solid #E7E7EC;
   /*padding-bottom: 13rem;*/
 }
-.app .module .inner{
+.inner{
   padding-left: 1rem;
+}
+.actions {
+  padding-left: 0.5rem;
 }
 
 .dfs_entry{
   font-size: 16px;
-  text-align: center;
+  text-align: left;
   border: 1px solid #E7E7EC;
   margin-bottom: 2px;
+  padding-left: 1rem;
+}
+
+.connected {
+  font-size: 12px;
+  padding-left: 1rem;
+}
+ .folder, .file {
+   font-size: 11px;
+   padding-right: 1rem;
+ }
+
+.down {
+  color: #a94442;
+  /*background-color: #f2dede;*/
 }
 
 .up {
   color: #3c763d;
-  background-color: #dff0d8;
+  /*background-color: #dff0d8;*/
 }
 
-.down {
-  color: #a94442;
-  background-color: #f2dede;
+#make-folder .info{
+  padding: 1rem 0rem 0rem 1rem;
+  text-align: center;
+}
+#make-folder .info label{
+  margin-top: 0.5rem;
+}
+
+.info {
+  background-color: #d9edf7;
+  color: #31708f;
 }
 
 /*.app h6 {

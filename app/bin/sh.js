@@ -3,8 +3,12 @@ const os = require('os');
 const exec = require('child_process').exec;
 const http = require('http').createServer();
 var io = require('socket.io')(http); 
+var ss = require('socket.io-stream');
 // var redis = require('socket.io-redis');
 var redis = require("redis");
+var path = require('path');
+var util = require('util');
+var moment = require('moment');
 
 /* redis */
 var host = process.env.REDIS_PORT_6379_TCP_ADDR || '172.16.238.5';
@@ -15,10 +19,18 @@ var sub = redis.createClient(port, host);
 
 sub.on("message", function(channel, message) {
   console.log("Message '" + message + "' on channel '" + channel + "' arrived!")
+  if(channel == "make_dir") {
+    if (!fs.existsSync(message)){
+        fs.mkdirSync(message);
+    }
+  }
 });
-sub.subscribe("lock");
-sub.subscribe("put");
-sub.subscribe("get");
+
+// 
+// sub.subscribe("lock");
+// sub.subscribe("put");
+// sub.subscribe("get");
+sub.subscribe("make_dir");
 
 // io.adapter(redis({ host: host, port: port }));
 
@@ -60,8 +72,44 @@ if (fs.existsSync(roots)){
 //   }
 // }
 
+var fileStats = function(socket,dir,items) {
+  var list = [];
+  items.forEach(function(file){
+    var stats = fs.statSync(dir+file);
+    var mtime = new Date(util.inspect(stats.mtime));
+    var type;
+    if(stats.isDirectory()){
+      type = 'isDirectory';
+    }
+    else if(stats.isFile()) {
+      type = 'isFile';
+    }
+    list.push({'name':file,'mtime': moment(mtime).format('DD/MM/YYYY, h:mm:ss A'), 'type': type });
+  });
+  socket.emit('dir_list', list);
+}
+
 io.on('connection', function(socket) {
   console.log('a user connected');
+  
+  socket.on('dir_listing', function(dir) {
+    fs.readdir(dir, function(err, items) {
+      fileStats(socket,dir,items);
+    });
+  });
+  
+  ss(socket).on('file_upload', function(stream, data) {
+     stream.pipe(fs.createWriteStream(data.name));    
+  });
+  
+  socket.on('make_dir', function(dir) {
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+        pub.publish("make_dir", dir);
+    }
+  });
+  
+  
   socket.on('chat_message', function(data) {
     console.log('message: ' + data + " " + ipv4_address);
     socket.emit('chat_message', data);
@@ -75,15 +123,6 @@ io.on('connection', function(socket) {
        console.log('user disconnected');
   });
 });
-// 
-// io.on('connection', function(socket){
-//   socket.on('chat_message', function(msg){
-//     io.emit('chat_message', ipv4_address);
-//   });
-//   socket.on('disconnect', function(){
-//        console.log('user disconnected');
-//   });
-// });
 // 
 // var sockets = [];
 // for (var k in dfs_network_list) {

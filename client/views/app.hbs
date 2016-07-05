@@ -1,0 +1,102 @@
+<div class="app-section">
+    <div class="app-header">
+        <div class="container">
+            <h6>DFS application</h6>
+        </div>
+    </div>
+    <div class="app">
+        <div class="container">
+            <div class="row">
+              <div class="eight columns">
+                <div class="inner">
+                    <h6>Server connection 
+                      <span class="u-pull-right"> 
+                      <a href="javascript:dir.disp_makeFolder();" class="actions"><i class="fa fa-folder-o" aria-hidden="true"></i> Folder</a>
+                      <a href="" class="actions"><i class="fa fa-file-o" aria-hidden="true"></i> File</a>
+                     </span>
+                   </h6>
+                    <h6 id="nav"></h6>
+                </div>
+                  <div id="make-folder" class="row">
+                    <div class="twelve columns info">
+                      <label class="two columns"> /name </label>
+                    <input type="text" id="folder-name" class="eight columns"/>
+                  </div>
+                </div>
+                  <div class="inner">
+                      <table class="u-full-width">
+                          <thead>
+                              <tr>
+                                  <th>Name</th>
+                                  <th>Modified</th>
+                              </tr>
+                          </thead>
+                          <tbody id="directory">
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+                <!-- <div class="four columns module">
+                    <div class="inner">
+                        <h6>Logs</h6>
+                    </div>
+                </div> -->
+                <!-- <div class="four columns module">
+                    <div class="inner">
+                        <h6>File status</h6>
+                    </div>
+                </div> -->
+                <div class="four columns module">
+                    <div class="inner">
+                        <h6>Server</h6>
+                        <input id="file" type="file" />
+                    </div>
+                    <div class="dfs_entry">
+                        <a href="javascript:serverCon.newCon('1');"><span>dfs_server 1</span> 
+                          <span id="dfs_1_status"> </span>
+                          <span id="dfs_1_con"></span>
+                        </a>
+                    </div>
+                    <div class="dfs_entry">
+                        <a href="javascript:serverCon.newCon('2');">
+                            <span>dfs_server 2 </span>
+                            <span id="dfs_2_status"></span>
+                            <span id="dfs_2_con"></span>
+                        </a>
+                    </div>
+                    <div class="dfs_entry">
+                        <a href="javascript:serverCon.newCon('3');">
+                            <span>  dfs_server 3 </span>
+                            <span id="dfs_3_status"></span>
+                            <span id="dfs_3_con"></span>
+                        </a>
+                    </div>
+                    <div class="dfs_entry">
+                        <a href="javascript:serverCon.newCon('4');">
+                            <span>  dfs_server 4</span>
+                            <span id="dfs_4_status"> </span>
+                            <span id="dfs_4_con"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/socket.io-stream.js"></script>
+<script src="/javascripts/directory.js"></script>
+<script src="/javascripts/servercom.js"></script>
+<script>
+    var uicom = io();
+    uicom.on('server_status', function(msg) {
+        var dfs_entry = JSON.parse(msg);
+        serverCon.dfs_map[dfs_entry.entry].status = dfs_entry.status;
+        if (dfs_entry.status) {
+            $("#dfs_" + dfs_entry.entry + "_status").html('<i class="fa fa-check-circle up" aria-hidden="true"></i>');
+        } else {
+            $("#dfs_" + dfs_entry.entry + "_status").html('<i class="fa fa-times-circle down" aria-hidden="true"></i>');
+            $("#dfs_" + serverCon.currently + "_con").html('');
+        }
+    });
+</script>

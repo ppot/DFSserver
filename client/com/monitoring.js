@@ -3,10 +3,10 @@ module.exports = function (io) {
   var ping = require('ping');
   var DfsStatus = require('../model/status.js');
   var dfs_map = {
-    "172.16.238.11": "dfs_1",
-    "172.16.238.12": "dfs_2",
-    "172.16.238.13": "dfs_3",
-    "172.16.238.14": "dfs_4"
+    "172.16.238.11": "1",
+    "172.16.238.12": "2",
+    "172.16.238.13": "3",
+    "172.16.238.14": "4"
   }
   var dfs_network_list = ["172.16.238.11","172.16.238.12", "172.16.238.13", "172.16.238.14" ];
   var netWorkPing = function() {
